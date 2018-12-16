@@ -17,3 +17,21 @@ input[type=text], select, textarea {
     margin-bottom: 16px;
     resize: vertical;
   }
+
+  .hidden {
+      display: none;
+  }
+
+.split-cost input[type=checkbox]{
+    display: none;
+}
+.split-cost input[type=checkbox]:checked ~ .remove-check{
+    display: none;
+}
+.split-cost input[type=checkbox]:checked ~ #amount-of-persons{
+    display: block;
+}
+
+.split-cost #amount-of-persons {
+    display: none;
+}
