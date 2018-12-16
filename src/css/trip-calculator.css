@@ -21,10 +21,7 @@ input[type=text], select, textarea {
   .hidden {
       display: none;
   }
-
-.split-cost input[type=checkbox]{
-    display: none;
-}
+  
 .split-cost input[type=checkbox]:checked ~ .remove-check{
     display: none;
 }
@@ -34,4 +31,15 @@ input[type=text], select, textarea {
 
 .split-cost #amount-of-persons {
     display: none;
+}
+
+.btn {
+    background: #000;
+    color: #fff;
+    border: 0;
+    padding: 12px 18px;
+    cursor: pointer;
+    margin-top: 1em;
+    font-size: inherit;
+    min-width: 200px;
 }

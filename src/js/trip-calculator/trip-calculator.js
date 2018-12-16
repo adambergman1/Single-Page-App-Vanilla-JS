@@ -29,16 +29,29 @@ class TripCalculator extends window.HTMLElement {
   }
 
   calculateCost () {
+    this.changeCommasToDots()
+    // this.miles.value = this.miles.value.replace(',', '.')
+    // this.consumption.value = this.consumption.value.replace(',', '.')
+    // this.gasPrice.value = this.gasPrice.value.replace(',', '.')
+
     let travelCost = this.shadowRoot.querySelector('.travel-cost')
     let p = document.createElement('p')
     travelCost.appendChild(p)
 
-    if (!this.amountOfPersons.value) {
-      let cost = this.miles.value * this.consumption.value * this.gasPrice.value
+    let cost = this.miles.value * this.consumption.value * this.gasPrice.value
+
+    if (!this.amountOfPersons.value || this.amountOfPersons.value === '0') {
       p.textContent = `Resan kostar ${Math.round(cost)} kronor.`
     } else {
-      let cost = this.miles.value * this.consumption.value * this.gasPrice.value / this.amountOfPersons.value
-      p.textContent = `Resan kostar ${Math.round(cost)} kronor.`
+      cost = cost / this.amountOfPersons.value
+      p.textContent = `Resan kostar ${Math.round(cost)} kronor per person.`
+    }
+  }
+
+  changeCommasToDots () {
+    let input = this.shadowRoot.querySelectorAll('form input[type="text"]')
+    for (let i = 0; i < input.length; i++) {
+      input[i].value = input[i].value.replace(',', '.')
     }
   }
 

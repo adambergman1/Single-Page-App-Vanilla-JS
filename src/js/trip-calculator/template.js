@@ -22,7 +22,7 @@ tripTemplate.innerHTML = /* html */ `
         </div>
     </div>
 
-    <input type="submit" value="Skicka">
+    <input type="submit" value="Skicka" class="btn">
     </form>
 
 
