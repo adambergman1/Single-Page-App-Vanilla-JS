@@ -16,6 +16,7 @@ class TripCalculator extends window.HTMLElement {
 
   connectedCallback () {
     this.checkForValues()
+    this.countInWear()
   }
 
   checkForValues () {
@@ -49,6 +50,24 @@ class TripCalculator extends window.HTMLElement {
     for (let i = 0; i < input.length; i++) {
       input[i].value = input[i].value.replace(',', '.')
     }
+  }
+
+  countInWear () {
+    let countWear = this.shadowRoot.querySelector('form input[id="count-in-wear"]')
+    countWear.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        this.gasPrice.value = 18.5
+        this.consumption.value = 1
+        this.gasPrice.classList.toggle('readonly')
+        this.consumption.classList.toggle('readonly')
+        e.preventDefault()
+      } else {
+        this.gasPrice.value = ''
+        this.consumption.value = ''
+        this.gasPrice.classList.toggle('readonly')
+        this.consumption.classList.toggle('readonly')
+      }
+    })
   }
 
   clearTravelCostArea () {

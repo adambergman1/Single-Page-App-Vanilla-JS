@@ -43,3 +43,8 @@ input[type=number], select, textarea {
     font-size: inherit;
     min-width: 200px;
 }
+
+.readonly {
+    pointer-events: none;
+    background: #eee;
+}
