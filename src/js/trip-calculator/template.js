@@ -2,6 +2,7 @@ const tripTemplate = document.createElement('template')
 tripTemplate.innerHTML = /* html */ `
 
 <div class="trip-calculator">
+<link rel="stylesheet" href="/css/trip-calculator.css">
 <form>
     <label for="miles">Antal mil</label>
     <input type="text" id="miles" name="miles" placeholder="Ange antal mil">
