@@ -23,24 +23,20 @@ class TripCalculator extends window.HTMLElement {
       if (this.miles.value && this.consumption.value && this.gasPrice.value) {
         e.preventDefault()
         this.clearTravelCostArea()
+        this.changeCommasToDots()
         this.calculateCost()
       }
     })
   }
 
   calculateCost () {
-    this.changeCommasToDots()
-    // this.miles.value = this.miles.value.replace(',', '.')
-    // this.consumption.value = this.consumption.value.replace(',', '.')
-    // this.gasPrice.value = this.gasPrice.value.replace(',', '.')
-
     let travelCost = this.shadowRoot.querySelector('.travel-cost')
     let p = document.createElement('p')
     travelCost.appendChild(p)
 
     let cost = this.miles.value * this.consumption.value * this.gasPrice.value
 
-    if (!this.amountOfPersons.value || this.amountOfPersons.value === '0') {
+    if (!this.amountOfPersons.value || this.amountOfPersons.value <= '1') {
       p.textContent = `Resan kostar ${Math.round(cost)} kronor.`
     } else {
       cost = cost / this.amountOfPersons.value
@@ -49,7 +45,7 @@ class TripCalculator extends window.HTMLElement {
   }
 
   changeCommasToDots () {
-    let input = this.shadowRoot.querySelectorAll('form input[type="text"]')
+    let input = this.shadowRoot.querySelectorAll('form input[type="number"]')
     for (let i = 0; i < input.length; i++) {
       input[i].value = input[i].value.replace(',', '.')
     }
