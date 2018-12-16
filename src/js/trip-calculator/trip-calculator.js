@@ -7,23 +7,26 @@ class TripCalculator extends window.HTMLElement {
     this.shadowRoot.appendChild(tripTemplate.content.cloneNode(true))
 
     this.miles = this.shadowRoot.querySelector('form input[id="miles"]')
-    this.consumption = this.shadowRoot.querySelector('input[id="consumption"]')
-    this.gasPrice = this.shadowRoot.querySelector('input[id="gas-price"]')
+    this.consumption = this.shadowRoot.querySelector('form input[id="consumption"]')
+    this.gasPrice = this.shadowRoot.querySelector('form input[id="gas-price"]')
+
+    this.submitBtn = this.shadowRoot.querySelector('form input[type="submit"]')
   }
 
   connectedCallback () {
-    this.test()
-    this.calculateCost()
+    this.checkForValues()
   }
 
-  test () {
-    console.log(this.miles.value)
+  checkForValues () {
+    this.submitBtn.addEventListener('click', (e) => {
+      if (this.miles.value && this.consumption.value && this.gasPrice.value) {
+        e.preventDefault()
+        this.calculateCost()
+      }
+    })
   }
 
   calculateCost () {
-    this.miles.value = 15
-    this.consumption.value = 0.8
-    this.gasPrice.value = 14
     console.log(`Resan kostar ${this.miles.value * this.consumption.value * this.gasPrice.value} kronor.`)
   }
 }
