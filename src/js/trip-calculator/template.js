@@ -1,8 +1,11 @@
 const tripTemplate = document.createElement('template')
 tripTemplate.innerHTML = /* html */ `
 
-<div class="trip-calculator">
+<div class="trip-calculator draggable-area" id="trip-calculator">
 <link rel="stylesheet" href="/css/trip-calculator.css">
+
+<div class="title-heading">Reseräknaren</div>
+<div class="main-area">
 
 <h1>Räkna ut vad resan kostar</h1>
 
@@ -33,6 +36,7 @@ tripTemplate.innerHTML = /* html */ `
 
 
 <div class="travel-cost">
+</div>
 </div>
 
 </div>
