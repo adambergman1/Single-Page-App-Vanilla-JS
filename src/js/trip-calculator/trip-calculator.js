@@ -97,28 +97,41 @@ class TripCalculator extends window.HTMLElement {
   }
 
   draggableWindows (e) {
+    let divs = this.shadowRoot.querySelectorAll('.draggable-area')
+    let windowHeading = this.shadowRoot.querySelector('.title-heading')
     let isMouseDown = false
-    let mouseOffset = { x: 0, y: 0 }
-    let dragElements = this.shadowRoot.querySelectorAll('.draggable-area')
 
-    for (let i = 0; i < dragElements.length; i++) {
-      let element = dragElements[i]
-      element.addEventListener('mousedown', (e) => {
+    let pos1 = 0
+    let pos2 = 0
+    let pos3 = 0
+    let pos4 = 0
+
+    for (let i = 0; i < divs.length; i++) {
+      let div = divs[i]
+
+      windowHeading.addEventListener('mousedown', (e) => {
         isMouseDown = true
-        mouseOffset = { x: element.offsetLeft - e.clientX, y: element.offsetTop - e.clientY }
+        pos3 = e.clientX
+        pos4 = e.clientY
       })
-      element.addEventListener('mousemove', (e) => {
+
+      document.addEventListener('mousemove', (e) => {
         e.preventDefault()
         if (isMouseDown) {
-          element.style.left = e.clientX + mouseOffset.x + 'px'
-          element.style.top = e.clientY + mouseOffset.y + 'px'
-          element.classList.add('active')
+          pos1 = pos3 - e.clientX
+          pos2 = pos4 - e.clientY
+          pos3 = e.clientX
+          pos4 = e.clientY
+          div.style.top = (div.offsetTop - pos2) + 'px'
+          div.style.left = (div.offsetLeft - pos1) + 'px'
+          div.classList.add('active')
         }
       })
-      element.addEventListener('mouseup', (e) => {
+
+      document.addEventListener('mouseup', (e) => {
         e.preventDefault()
         isMouseDown = false
-        element.classList.remove('active')
+        div.classList.remove('active')
       })
     }
   }
