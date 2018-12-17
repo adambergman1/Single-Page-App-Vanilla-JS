@@ -11,7 +11,7 @@ tripTemplate.innerHTML = /* html */ `
     <input type="number" id="miles" name="miles" placeholder="Ange antal mil" required>
 
     <label for="consumption">Förbrukning</label>
-    <input type="number" id="consumption" name="consumption" placeholder="Förbrukning per mil" required>
+    <input type="number" id="consumption" name="consumption" placeholder="Ange förbrukning per mil" required>
 
     <label for="gas-price">Bränslepris</label>
     <input type="number" id="gas-price" name="gas-price" placeholder="Ange kostnaden för en liter bensin/diesel" required>

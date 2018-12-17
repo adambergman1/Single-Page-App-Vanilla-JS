@@ -21,8 +21,8 @@ class TripCalculator extends window.HTMLElement {
 
   checkForValues () {
     this.submitBtn.addEventListener('click', (e) => {
+      e.preventDefault()
       if (this.miles.value && this.consumption.value && this.gasPrice.value) {
-        e.preventDefault()
         this.clearTravelCostArea()
         this.changeCommasToDots()
         this.calculateCost()
@@ -55,19 +55,35 @@ class TripCalculator extends window.HTMLElement {
   countInWear () {
     let countWear = this.shadowRoot.querySelector('form input[id="count-in-wear"]')
     countWear.addEventListener('change', (e) => {
+      e.preventDefault()
       if (e.target.checked) {
+        this.saveToLocalStorage()
         this.gasPrice.value = 18.5
         this.consumption.value = 1
         this.gasPrice.classList.toggle('readonly')
         this.consumption.classList.toggle('readonly')
-        e.preventDefault()
       } else {
-        this.gasPrice.value = ''
-        this.consumption.value = ''
+        this.fetchLocalStorage()
         this.gasPrice.classList.toggle('readonly')
         this.consumption.classList.toggle('readonly')
       }
     })
+  }
+
+  saveToLocalStorage () {
+    let obj = {
+      'consumption': this.consumption.value,
+      'gasPrice': this.gasPrice.value
+    }
+
+    window.localStorage.setItem('data', JSON.stringify(obj))
+  }
+
+  fetchLocalStorage () {
+    let savedObj = JSON.parse(window.localStorage.getItem('data'))
+
+    this.gasPrice.value = savedObj.gasPrice
+    this.consumption.value = savedObj.consumption
   }
 
   clearTravelCostArea () {
