@@ -1,0 +1,15 @@
+.window {
+    position: absolute;
+    max-width: 400px;
+}
+
+.window-heading {
+    background: lightblue;
+    text-align: center;
+    padding: 6px 0;
+    cursor: move;
+}
+
+.active {
+    opacity: 0.5;
+}

@@ -1,3 +1,4 @@
+import './draggable/draggable.js'
 import './trip-calculator/trip-calculator.js'
 
 // Open Trip Calculator On click
