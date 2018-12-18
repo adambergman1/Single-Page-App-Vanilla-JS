@@ -1,0 +1,61 @@
+.memory img:hover {
+    opacity: 0.8;
+    box-shadow: 3px 5px 20px #ddd;
+}
+
+.memory img {
+    max-width: 150px;
+}
+
+.memory {
+    margin: 0 auto;
+    padding: 40px;
+    background: #f6f6f6;
+    font-size: 16px;
+    text-align: center;
+}
+
+.solved {
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.choose-layout {
+    max-width: 300px;
+    margin: 20px auto;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.select-amount {
+    -webkit-flex: 1;
+    -ms-flex: 1; 
+    flex: 1;
+}
+
+.select-amount select {
+width: 100%;
+height: 30px;
+}
+
+.start {
+    -webkit-flex: 1;
+    -ms-flex: 1; 
+    flex: 1;
+    border-radius: 3px;
+    border: 0;
+    cursor: pointer;
+    padding: 6px 12px;
+    margin-left: 5px;
+    background: #ba93ff;
+    font-size: 14px;
+}
+
+.start:hover {
+    transition: 0.5s;
+    background: #93bcff;
+}
