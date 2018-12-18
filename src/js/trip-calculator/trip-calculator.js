@@ -15,7 +15,6 @@ class TripCalculator extends window.HTMLElement {
   }
 
   connectedCallback () {
-    this.draggableWindows()
     this.checkForValues()
     this.countInWear()
   }
@@ -27,6 +26,13 @@ class TripCalculator extends window.HTMLElement {
         this.clearTravelCostArea()
         this.changeCommasToDots()
         this.calculateCost()
+      }
+    })
+
+    let revealContent = this.shadowRoot.querySelector('#reveal-content')
+    revealContent.addEventListener('change', (e) => {
+      if (!e.target.checked) {
+        this.amountOfPersons.value = ''
       }
     })
   }
@@ -93,46 +99,6 @@ class TripCalculator extends window.HTMLElement {
       while (travelCostDiv.hasChildNodes()) {
         travelCostDiv.removeChild(travelCostDiv.lastChild)
       }
-    }
-  }
-
-  draggableWindows (e) {
-    let divs = this.shadowRoot.querySelectorAll('.draggable-area')
-    let windowHeading = this.shadowRoot.querySelector('.title-heading')
-    let isMouseDown = false
-
-    let pos1 = 0
-    let pos2 = 0
-    let pos3 = 0
-    let pos4 = 0
-
-    for (let i = 0; i < divs.length; i++) {
-      let div = divs[i]
-
-      windowHeading.addEventListener('mousedown', (e) => {
-        isMouseDown = true
-        pos3 = e.clientX
-        pos4 = e.clientY
-      })
-
-      document.addEventListener('mousemove', (e) => {
-        e.preventDefault()
-        if (isMouseDown) {
-          pos1 = pos3 - e.clientX
-          pos2 = pos4 - e.clientY
-          pos3 = e.clientX
-          pos4 = e.clientY
-          div.style.top = (div.offsetTop - pos2) + 'px'
-          div.style.left = (div.offsetLeft - pos1) + 'px'
-          div.classList.add('active')
-        }
-      })
-
-      document.addEventListener('mouseup', (e) => {
-        e.preventDefault()
-        isMouseDown = false
-        div.classList.remove('active')
-      })
     }
   }
 }

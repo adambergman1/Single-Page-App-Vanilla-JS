@@ -2,8 +2,11 @@ const tripTemplate = document.createElement('template')
 tripTemplate.innerHTML = /* html */ `
 <link rel="stylesheet" href="/css/trip-calculator.css">
 <drag-able data-title="Reseräknaren">
+
 <div class="trip-calculator" id="trip-calculator">
+
 <h1>Räkna ut vad resan kostar</h1>
+
 <form method="post" action="">
     <label for="miles">Antal mil</label>
     <input type="number" id="miles" name="miles" placeholder="Ange antal mil" required>
@@ -28,8 +31,8 @@ tripTemplate.innerHTML = /* html */ `
 
     <input type="submit" value="Skicka" class="btn">
     </form>
-<div class="travel-cost">
-</div>
+    <div class="travel-cost">
+    </div>
 
 </div>
 </drag-able>

@@ -8,6 +8,8 @@
     text-align: center;
     padding: 6px 0;
     cursor: move;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
 }
 
 .active {
