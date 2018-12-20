@@ -55,6 +55,26 @@ class Draggable extends window.HTMLElement {
       })
     }
   }
+
+  find () {
+    let windows = this.shadowRoot.querySelectorAll('.window')
+
+    for (let i = 0; i < windows.length; i++) {
+      let div = windows[i]
+
+      window.addEventListener('mousedown', (e) => {
+        // console.log(e.target.shadowRoot.firstElementChild.nodeName)
+        let dragable = e.target.shadowRoot.querySelector('drag-able')
+        let dragableWindow = dragable.shadowRoot.lastElementChild
+        console.log(dragableWindow)
+        // console.log(e.target.shadowRoot.querySelector('drag-able').shadowRoot.querySelector('window'))
+        // if (e.target.shadowRoot.firstElementChild.nodeName === 'DRAG-ABLE') {
+        //   console.log('Detta är en DRAG ABLE')
+        //   div.parentNode.lastElementChild.style.zIndex = 20
+        // }
+      })
+    }
+  }
 }
 
 window.customElements.define('drag-able', Draggable)

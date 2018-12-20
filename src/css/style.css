@@ -1,6 +1,8 @@
 .window {
     position: absolute;
     max-width: 400px;
+    border: 3px solid lightblue;
+    border-radius: 9px;
 }
 
 .window-heading {
