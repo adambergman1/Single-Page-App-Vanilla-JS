@@ -6,10 +6,42 @@ html, body, div, span, iframe, p, img, figure, label, form, nav {
     vertical-align: baseline;
 }
 
-html, body {
+html {
     height: 100%;
     width: 100%;
-    max-width: 1920px;
+    background-image: url('/image/bg.jpg'); 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.dock {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+.dock > div {
+    display: inline-block;
+}
+
+.dock > div img {
+    max-width: 60px;
+    filter: grayscale(100%);
+}
+
+.dock > div img:hover {
+    transform: scale(1.5);
+    transition: 0.3s;
+    filter: grayscale(0);
+    overflow-y:auto;
+    margin-bottom: 15px;
 }
 
 .window {
@@ -57,6 +89,8 @@ html, body {
     left: 0 !important;
     bottom: 0 !important;
     right: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
     overflow: auto;
 }
 

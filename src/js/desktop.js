@@ -13,6 +13,7 @@ export class Desktop {
     this.startTripCalculator()
     this.startMemory()
     this.checkForClickOnWindow()
+    this.showAppTextOnHover()
   }
 
   startTripCalculator () {
@@ -53,23 +54,31 @@ export class Desktop {
 
   updateZIndex () {
     for (let i = 0; i < this.arr.length; i++) {
-      console.log(this.arr)
       this.getWindow(this.arr[i]).style.zIndex = this.Z_INDEX + i
     }
   }
 
-  // closeWindow () {
-  //   for (let i = 0; i < this.arr.length; i++) {
-  //     let win = this.arr[i].shadowRoot.querySelector('drag-able').shadowRoot.querySelector('.window')
-  //     let closeBtn = win.querySelector('.window-buttons').querySelector('.close-btn')
-  //     console.log('clicked on array')
+  showAppTextOnHover () {
+    let dockDiv = document.querySelectorAll('.dock > div')
+    for (let i = 0; i < dockDiv.length; i++) {
+      dockDiv.addEventListener('mouseover', (e) => {
+        console.log('working')
+      })
+    }
+  }
 
-  //     closeBtn.addEventListener('click', (e) => {
-  //       console.log('Clicking on close')
-  //       this.arr.pop(i)
-  //       win.parentNode.removeChild(win)
-  //       console.log(this.arr)
-  //     })
-  //   }
-  // }
+  closeWindow () {
+    for (let i = 0; i < this.arr.length; i++) {
+      let win = this.arr[i].shadowRoot.querySelector('drag-able').shadowRoot.querySelector('.window')
+      let closeBtn = win.querySelector('.window-buttons').querySelector('.close-btn')
+      console.log('clicked on array')
+
+      closeBtn.addEventListener('click', (e) => {
+        console.log('Clicking on close')
+        this.arr.pop(i)
+        win.parentNode.removeChild(win)
+        console.log(this.arr)
+      })
+    }
+  }
 }

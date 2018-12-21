@@ -3,20 +3,23 @@
     <head>
         <meta charset="utf-8">
         <title>PWD</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
         <script type="module" src="js/app.js"></script>
 
     </head>
     <body>
+        <div class="desktop">
         <div class="opened-windows"></div>
-            <div class="trip">
-                <a href="#" id="tripBtn">Reseräknaren</a>
-            </div>
+            <div class="dock">
+                <div class="trip">
+                    <a href="#" id="tripBtn"><img src="/image/tripcalc.jpg"><p class="hidden">Trip Calculator</p></a>
+                </div>
 
-            <div class="memory">
-                <a href="#" id="memoryBtn">Memory</a>
+                <div class="memory">
+                    <a href="#" id="memoryBtn"><img src="/image/memory.jpg"><p class="hidden">Memory</p></a>
+                </div>
             </div>
-        
-
+        </div>
         <script nomodule src="build.js"></script>
     </body>
 </html>

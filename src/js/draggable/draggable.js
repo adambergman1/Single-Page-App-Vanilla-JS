@@ -74,12 +74,6 @@ class Draggable extends window.HTMLElement {
           div.classList.remove('maximize')
         }
       })
-
-      // Close window
-      let closeBtn = this.shadowRoot.querySelector('.close-btn')
-      closeBtn.addEventListener('click', (e) => {
-        div.parentNode.removeChild(div)
-      })
     }
   }
 }
