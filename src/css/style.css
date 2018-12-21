@@ -1,8 +1,26 @@
+html, body, div, span, iframe, p, img, figure, label, form, nav {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    max-width: 1920px;
+}
+
 .window {
     position: absolute;
-    max-width: 400px;
+    min-width: 400px;
+    min-height: 300px;
     border: 3px solid lightblue;
+    background: #f2f2f2;
     border-radius: 9px;
+    resize: both;
+    overflow: auto;
 }
 
 .window-heading {
@@ -16,4 +34,36 @@
 
 .active {
     opacity: 0.5;
+}
+
+.window-buttons {
+    position: absolute;
+    top: 6px;
+    left: 10px;
+}
+
+.close-btn img, .maximize-btn img {
+    width: 14px;
+    margin-left: 5px;
+}
+
+.window-buttons label {
+    cursor: pointer;
+}
+
+.maximize {
+    position: fixed;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    overflow: auto;
+}
+
+.maximize .window-heading {
+    pointer-events: none;
+}
+
+.hidden, input.hidden {
+    display: none;
 }

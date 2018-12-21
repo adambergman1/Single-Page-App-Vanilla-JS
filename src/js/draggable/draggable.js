@@ -3,6 +3,16 @@ template.innerHTML = /* html */ `
 <link rel="stylesheet" href="/css/style.css">
 <div class="window">
   <div class="window-heading"></div>
+
+    <div class="window-buttons">
+      <a href="#" class="close-btn"><img src="/image/close-normal.png" width="14"></a>
+      
+
+      <label for="maximize-btn"><img src="/image/max-normal.png" width="14"></label>
+        <input type="checkbox" id="maximize-btn" class="maximize-btn hidden" role="button">
+
+    </div>
+
   <slot class="main-area"></slot>
 </div>
 `
@@ -53,25 +63,22 @@ class Draggable extends window.HTMLElement {
         isMouseDown = false
         div.classList.remove('active')
       })
-    }
-  }
 
-  find () {
-    let windows = this.shadowRoot.querySelectorAll('.window')
+      // Maximize the window
+      let maximizeBtn = this.shadowRoot.querySelector('#maximize-btn')
+      maximizeBtn.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          console.log('clicked')
+          div.classList.add('maximize')
+        } else {
+          div.classList.remove('maximize')
+        }
+      })
 
-    for (let i = 0; i < windows.length; i++) {
-      let div = windows[i]
-
-      window.addEventListener('mousedown', (e) => {
-        // console.log(e.target.shadowRoot.firstElementChild.nodeName)
-        let dragable = e.target.shadowRoot.querySelector('drag-able')
-        let dragableWindow = dragable.shadowRoot.lastElementChild
-        console.log(dragableWindow)
-        // console.log(e.target.shadowRoot.querySelector('drag-able').shadowRoot.querySelector('window'))
-        // if (e.target.shadowRoot.firstElementChild.nodeName === 'DRAG-ABLE') {
-        //   console.log('Detta är en DRAG ABLE')
-        //   div.parentNode.lastElementChild.style.zIndex = 20
-        // }
+      // Close window
+      let closeBtn = this.shadowRoot.querySelector('.close-btn')
+      closeBtn.addEventListener('click', (e) => {
+        div.parentNode.removeChild(div)
       })
     }
   }

@@ -5,7 +5,7 @@ import './memory/Memory.js'
 export class Desktop {
   constructor () {
     this.arr = []
-    this.Z_INDEX_OFFSET = 20
+    this.Z_INDEX = 20
     this.arr = []
     this.zIndex_offset = 20
     this.openedWindows = document.querySelector('.opened-windows')
@@ -53,7 +53,23 @@ export class Desktop {
 
   updateZIndex () {
     for (let i = 0; i < this.arr.length; i++) {
-      this.getWindow(this.arr[i]).style.zIndex = this.Z_INDEX_OFFSET + i
+      console.log(this.arr)
+      this.getWindow(this.arr[i]).style.zIndex = this.Z_INDEX + i
     }
   }
+
+  // closeWindow () {
+  //   for (let i = 0; i < this.arr.length; i++) {
+  //     let win = this.arr[i].shadowRoot.querySelector('drag-able').shadowRoot.querySelector('.window')
+  //     let closeBtn = win.querySelector('.window-buttons').querySelector('.close-btn')
+  //     console.log('clicked on array')
+
+  //     closeBtn.addEventListener('click', (e) => {
+  //       console.log('Clicking on close')
+  //       this.arr.pop(i)
+  //       win.parentNode.removeChild(win)
+  //       console.log(this.arr)
+  //     })
+  //   }
+  // }
 }
