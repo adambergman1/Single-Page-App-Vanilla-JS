@@ -2,38 +2,75 @@ import './draggable/draggable.js'
 import './trip-calculator/trip-calculator.js'
 import './memory/Memory.js'
 
-export class Desktop {
+const template = document.createElement('template')
+template.innerHTML = /* html */ `
+<link rel="stylesheet" href="/css/style.css">
+<div class="desktop">
+        <div class="opened-windows"></div>
+            <div class="dock">
+                <div class="trip">
+                    <a href="#" id="tripBtn"><img src="/image/tripcalc.jpg"><p><span>Reseräknaren</span></p></a>
+                </div>
+
+                <div class="memory">
+                    <a href="#" id="memoryBtn"><img src="/image/memory.jpg"><p><span>Memory</span></p></a>
+                </div>
+            </div>
+        </div>
+`
+
+export class Desktop extends window.HTMLElement {
   constructor () {
+    super()
+    this.attachShadow({ mode: 'open' })
+    this.shadowRoot.appendChild(template.content.cloneNode(true))
     this.arr = []
     this.Z_INDEX = 20
     this.arr = []
-    this.zIndex_offset = 20
-    this.openedWindows = document.querySelector('.opened-windows')
+    this.openedWindows = this.shadowRoot.querySelector('.opened-windows')
 
     this.startTripCalculator()
     this.startMemory()
     this.checkForClickOnWindow()
-    this.showAppTextOnHover()
   }
 
   startTripCalculator () {
-    const tripBtn = document.querySelector('#tripBtn')
+    const tripBtn = this.shadowRoot.querySelector('#tripBtn')
     tripBtn.addEventListener('click', e => {
       window.localStorage.clear()
       let tripTemplate = document.createElement('trip-calculator')
       this.openedWindows.appendChild(tripTemplate)
       this.arr.push(tripTemplate)
       this.updateZIndex()
+
+      let win = tripTemplate.shadowRoot.querySelector('drag-able')
+        .shadowRoot.querySelector('.window')
+      let close = win.querySelector('.close-btn')
+
+      close.addEventListener('click', (e) => {
+        console.log('Closing:')
+        console.log(win)
+
+        console.log('Array before removal:')
+        console.log(this.arr)
+
+        this.arr.splice(parent, 1)
+        win.parentNode.removeChild(win)
+
+        console.log('Array after removal:')
+        console.log(this.arr)
+      })
     })
   }
 
   startMemory () {
-    const memoryBtn = document.querySelector('#memoryBtn')
+    const memoryBtn = this.shadowRoot.querySelector('#memoryBtn')
     memoryBtn.addEventListener('click', e => {
       let memoryTemplate = document.createElement('memory-game')
       this.openedWindows.appendChild(memoryTemplate)
       this.arr.push(memoryTemplate)
       this.updateZIndex()
+      this.closeWindow()
     })
   }
 
@@ -58,27 +95,52 @@ export class Desktop {
     }
   }
 
-  showAppTextOnHover () {
-    let dockDiv = document.querySelectorAll('.dock > div')
-    for (let i = 0; i < dockDiv.length; i++) {
-      dockDiv.addEventListener('mouseover', (e) => {
-        console.log('working')
-      })
-    }
-  }
+  // closeWindow (e) {
+  // let target = this.arr.indexOf(e.target)
+  // console.log(target)
+  // let win = this.arr.shadowRoot.querySelector('drag-able').shadowRoot.querySelector('.window')
+  // let closeBtn = win.querySelector('.window-buttons .close-btn')
 
-  closeWindow () {
-    for (let i = 0; i < this.arr.length; i++) {
-      let win = this.arr[i].shadowRoot.querySelector('drag-able').shadowRoot.querySelector('.window')
-      let closeBtn = win.querySelector('.window-buttons').querySelector('.close-btn')
-      console.log('clicked on array')
+  // closeBtn.addEventListener('click', (e) => {
+  //   e.preventDefault()
+  //   e.stopPropagation()
+  //   console.log('Closing:')
+  //   console.log(this.arr.indexOf(e.target))
 
-      closeBtn.addEventListener('click', (e) => {
-        console.log('Clicking on close')
-        this.arr.pop(i)
-        win.parentNode.removeChild(win)
-        console.log(this.arr)
-      })
-    }
-  }
+  //   console.log('Array before removal:')
+  //   console.log(this.arr)
+
+  //   this.arr.splice(e.target, 1)
+  //   win.parentNode.removeChild(win)
+
+  //   console.log('Array after removal:')
+  //   console.log(this.arr)
+
+  //   closeBtn.removeEventListener('click', (e))
+  // })
+
+  // for (let i = 0; i < this.arr.length; i++) {
+  //   let win = this.arr[i].shadowRoot.querySelector('drag-able').shadowRoot.querySelector('.window')
+  //   let closeBtn = win.querySelector('.window-buttons .close-btn')
+
+  //   closeBtn.addEventListener('click', (e) => {
+  //     e.preventDefault()
+  //     console.log('Closing:')
+  //     console.log(this.arr[i])
+
+  //     console.log('Array before removal:')
+  //     console.log(this.arr)
+
+  //     this.arr.splice(i, 1)
+  //     win.parentNode.removeChild(win)
+
+  //     console.log('Array after removal:')
+  //     console.log(this.arr)
+
+  //     closeBtn.removeEventListener('click', (e))
+  //   })
+  // }
+  // }
 }
+
+window.customElements.define('personal-desktop', Desktop)

@@ -5,8 +5,7 @@ template.innerHTML = /* html */ `
   <div class="window-heading"></div>
 
     <div class="window-buttons">
-      <a href="#" class="close-btn"><img src="/image/close-normal.png" width="14"></a>
-      
+      <a href="#" class="close-btn"><img src="/image/close-normal.png" width="14"></a>  
 
       <label for="maximize-btn"><img src="/image/max-normal.png" width="14"></label>
         <input type="checkbox" id="maximize-btn" class="maximize-btn hidden" role="button">
@@ -68,7 +67,6 @@ class Draggable extends window.HTMLElement {
       let maximizeBtn = this.shadowRoot.querySelector('#maximize-btn')
       maximizeBtn.addEventListener('change', (e) => {
         if (e.target.checked) {
-          console.log('clicked')
           div.classList.add('maximize')
         } else {
           div.classList.remove('maximize')

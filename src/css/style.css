@@ -19,9 +19,6 @@ html {
 .dock {
     position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
-    top: auto;
     width: 100%;
     text-align: center;
     margin: auto;
@@ -29,19 +26,59 @@ html {
 
 .dock > div {
     display: inline-block;
+    position: relative;
+    margin: 0 0 15px 0;
+    -webkit-box-reflect: below -16px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(91%, rgba(255, 255, 255, .1)), color-stop(91.01%, transparent), to(transparent));
 }
 
 .dock > div img {
-    max-width: 60px;
-    filter: grayscale(100%);
+    width: 60px;
 }
 
 .dock > div img:hover {
-    transform: scale(1.5);
+    width: 100px;
     transition: 0.3s;
-    filter: grayscale(0);
-    overflow-y:auto;
-    margin-bottom: 15px;
+
+}
+
+.dock > div a p {
+    display: none;
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    width: 150px;
+    margin-left: -75px;
+    text-align: center;
+}
+
+.dock > div a p:after {
+        width:24px;
+        height:12px;
+        overflow:hidden;
+        content: "";
+        position:absolute;
+        width:12px;
+        height:12px;
+        left:50%;
+        top:100%;
+        /* transform:translate(-50%,-50%) rotate(45deg); */
+        transform: rotate(45deg);
+         -webkit-transform: rotate(45deg);
+        background-color:rgba(255, 255, 255, 0.9);
+        z-index: -100;
+}
+
+.dock > div a p span {
+    display: inline-block;
+    padding: 5px 12px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: inherit;
+    color: #000;
+    border-radius: 3px;
+}
+
+.dock > div a:hover p {
+    display: block;
 }
 
 .window {
