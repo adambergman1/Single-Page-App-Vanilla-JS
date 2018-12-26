@@ -1,6 +1,7 @@
 import './draggable/draggable.js'
 import './trip-calculator/trip-calculator.js'
 import './memory/Memory.js'
+import './chat/chat.js'
 
 const template = document.createElement('template')
 template.innerHTML = /* html */ `
@@ -14,6 +15,10 @@ template.innerHTML = /* html */ `
 
                 <div class="memory">
                     <a href="#" id="memoryBtn"><img src="/image/memory.jpg"><p><span>Memory</span></p></a>
+                </div>
+
+                <div class="chat">
+                <a href="#" id="chatBtn"><img src="/image/chat.png"><p><span>Chatt</span></p></a>
                 </div>
             </div>
         </div>
@@ -31,6 +36,7 @@ export class Desktop extends window.HTMLElement {
 
     this.startTripCalculator()
     this.startMemory()
+    this.startChat()
     this.checkForClickOnWindow()
   }
 
@@ -69,6 +75,17 @@ export class Desktop extends window.HTMLElement {
       let memoryTemplate = document.createElement('memory-game')
       this.openedWindows.appendChild(memoryTemplate)
       this.arr.push(memoryTemplate)
+      this.updateZIndex()
+      this.closeWindow()
+    })
+  }
+
+  startChat () {
+    const chatBtn = this.shadowRoot.querySelector('#chatBtn')
+    chatBtn.addEventListener('click', e => {
+      const chatTemplate = document.createElement('chat-app')
+      this.openedWindows.appendChild(chatTemplate)
+      this.arr.push(chatTemplate)
       this.updateZIndex()
       this.closeWindow()
     })

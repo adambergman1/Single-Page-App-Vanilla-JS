@@ -1,0 +1,10 @@
+.chat {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px 0;
+    width: 90%;
+}
+
+textarea {
+    max-width: 90%;
+}
