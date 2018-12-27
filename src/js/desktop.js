@@ -10,11 +10,11 @@ template.innerHTML = /* html */ `
         <div class="opened-windows"></div>
             <div class="dock">
                 <div class="trip">
-                    <a href="#" id="tripBtn"><img src="/image/tripcalc.jpg"><p><span>Reseräknaren</span></p></a>
+                    <a href="#" id="tripBtn"><img src="/image/performance.png"><p><span>Reseräknaren</span></p></a>
                 </div>
 
                 <div class="memory">
-                    <a href="#" id="memoryBtn"><img src="/image/memory.jpg"><p><span>Memory</span></p></a>
+                    <a href="#" id="memoryBtn"><img src="/image/memory.png"><p><span>Memory</span></p></a>
                 </div>
 
                 <div class="chat">
@@ -76,7 +76,6 @@ export class Desktop extends window.HTMLElement {
       this.openedWindows.appendChild(memoryTemplate)
       this.arr.push(memoryTemplate)
       this.updateZIndex()
-      this.closeWindow()
     })
   }
 
@@ -87,7 +86,6 @@ export class Desktop extends window.HTMLElement {
       this.openedWindows.appendChild(chatTemplate)
       this.arr.push(chatTemplate)
       this.updateZIndex()
-      this.closeWindow()
     })
   }
 

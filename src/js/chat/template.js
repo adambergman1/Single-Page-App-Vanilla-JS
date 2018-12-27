@@ -19,10 +19,10 @@ const chatTemplate = document.createElement('template')
 chatTemplate.innerHTML = /* html */ `
 
 <div class="messages">
-    <div class="message">
-        <p class="text"></p>
-        <p class="author"></p>
-    </div>
+        <div class="message">
+            <p class="text"></p>
+            <p class="author"></p>
+        </div>
     <textarea class="messageArea"></textarea>
 </div>
 `

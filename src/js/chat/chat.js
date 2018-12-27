@@ -5,14 +5,8 @@ class Chat extends window.HTMLElement {
     super()
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(welcomeTemplate.content.cloneNode(true))
-
     this.chatArea = this.shadowRoot.querySelector('.chat')
-    this.textarea = this.shadowRoot.querySelector('textarea')
-
-    this.username = 'Adam'
-    this.channel = ''
-    this.socket = new WebSocket('wss://vhost3.lnu.se:20080/socket/')
-    this.key = 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
+    this.username = this.shadowRoot.querySelector('.welcome #username')
   }
 
   connectedCallback () {
@@ -21,33 +15,45 @@ class Chat extends window.HTMLElement {
 
   startChat () {
     const startChatBtn = this.shadowRoot.querySelector('.welcome .start-chat')
-    const username = this.shadowRoot.querySelector('.welcome #username')
 
     startChatBtn.addEventListener('click', (e) => {
-      if (username.value) {
+      if (this.username.value) {
         console.log('Ready to chat!')
         this.clearWelcomeArea()
         this.chatArea.appendChild(chatTemplate.content.cloneNode(true))
-
         this.connect()
-        this.textarea.addEventListener('keypress', (e) => {
+
+        const textarea = this.shadowRoot.querySelector('textarea')
+        textarea.addEventListener('keypress', (e) => {
           if (e.keyCode === 13) {
-            e.preventDefault()
             this.sendMessage(e.target.value)
             e.target.value = ''
+            e.preventDefault()
           }
         })
       }
     })
   }
 
-  connect () {
-    this.socket.addEventListener('open', (e) => {
-      const sendChat = this.element.querySelector('.sendChat')
-      sendChat.addEventListener('click', function (event) {
-        event.preventDefault()
-        this.send()
-      }.bind(this), false)
+  async connect () {
+    this.socket = await new WebSocket('ws://vhost3.lnu.se:20080/socket/')
+
+    return new Promise((resolve, reject) => {
+      if (this.socket && this.socket.readyState === 1) {
+        resolve(this.socket)
+      }
+
+      this.socket.addEventListener('open', (e) => {
+        resolve(this.socket)
+      })
+
+      this.socket.addEventListener('message', (e) => {
+        const message = JSON.parse(e.data)
+        this.printMessage(message)
+        if (message.type === 'message') {
+          // this.printMessage(message)
+        }
+      })
     })
   }
 
@@ -55,16 +61,23 @@ class Chat extends window.HTMLElement {
     const data = {
       type: 'message',
       data: text,
-      username: this.username,
-      channel: this.channel,
-      key: this.key
+      username: this.username.value,
+      time: Date.now(),
+      channel: '',
+      key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
     }
-    this.socket.send(JSON.stringify(data))
-    console.log('Sending message', text)
+    this.connect().then(() => {
+      this.socket.send(JSON.stringify(data))
+      console.log('Sending message', text)
+    })
   }
 
-  printMessage () {
+  printMessage (message) {
+    const messageDiv = this.shadowRoot.querySelector('.messages')
+    messageDiv.querySelectorAll('.text')[0].textContent = message.data
+    messageDiv.querySelectorAll('.author')[0].textContent = message.username
 
+    this.chatArea.querySelectorAll('.messages')[0].appendChild(messageDiv)
   }
 
   clearWelcomeArea () {
