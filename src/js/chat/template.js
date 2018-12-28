@@ -18,13 +18,20 @@ welcomeTemplate.innerHTML = /* html */ `
 const chatTemplate = document.createElement('template')
 chatTemplate.innerHTML = /* html */ `
 
-<div class="messages">
-        <div class="message">
-            <p class="text"></p>
-            <p class="author"></p>
+    <div class="messages">
+        <template>
+            <div class="message">
+                <p class="author"></p>
+                <p class="text"></p>
+                <p class="time"></p>
+            </div>
+        </template>
         </div>
-    <textarea class="messageArea"></textarea>
-</div>
+
+            <div class="send-msg">
+                <textarea class="message-area"></textarea>
+                <!-- <input type="submit" value="Send" class="send-btn"> -->
+            </div>
 `
 
 export {

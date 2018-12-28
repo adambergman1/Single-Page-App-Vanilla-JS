@@ -7,6 +7,7 @@ class Chat extends window.HTMLElement {
     this.shadowRoot.appendChild(welcomeTemplate.content.cloneNode(true))
     this.chatArea = this.shadowRoot.querySelector('.chat')
     this.username = this.shadowRoot.querySelector('.welcome #username')
+    this.channel = this.shadowRoot.querySelector('.welcome #channel')
   }
 
   connectedCallback () {
@@ -22,21 +23,13 @@ class Chat extends window.HTMLElement {
         this.clearWelcomeArea()
         this.chatArea.appendChild(chatTemplate.content.cloneNode(true))
         this.connect()
-
-        const textarea = this.shadowRoot.querySelector('textarea')
-        textarea.addEventListener('keypress', (e) => {
-          if (e.keyCode === 13) {
-            this.sendMessage(e.target.value)
-            e.target.value = ''
-            e.preventDefault()
-          }
-        })
+        this.listenToEnterBtn()
       }
     })
   }
 
-  async connect () {
-    this.socket = await new WebSocket('ws://vhost3.lnu.se:20080/socket/')
+  connect () {
+    this.socket = new WebSocket('ws://vhost3.lnu.se:20080/socket/')
 
     return new Promise((resolve, reject) => {
       if (this.socket && this.socket.readyState === 1) {
@@ -49,9 +42,9 @@ class Chat extends window.HTMLElement {
 
       this.socket.addEventListener('message', (e) => {
         const message = JSON.parse(e.data)
-        this.printMessage(message)
+
         if (message.type === 'message') {
-          // this.printMessage(message)
+          this.printMessage(message)
         }
       })
     })
@@ -61,11 +54,12 @@ class Chat extends window.HTMLElement {
     const data = {
       type: 'message',
       data: text,
-      username: this.username.value,
+      username: this.username.value || 'Pro',
       time: Date.now(),
-      channel: '',
+      channel: this.channel.value | '',
       key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
     }
+
     this.connect().then(() => {
       this.socket.send(JSON.stringify(data))
       console.log('Sending message', text)
@@ -73,11 +67,18 @@ class Chat extends window.HTMLElement {
   }
 
   printMessage (message) {
-    const messageDiv = this.shadowRoot.querySelector('.messages')
-    messageDiv.querySelectorAll('.text')[0].textContent = message.data
-    messageDiv.querySelectorAll('.author')[0].textContent = message.username
+    const template = this.shadowRoot.querySelectorAll('template')[0]
+      .content.firstElementChild.cloneNode(true)
 
-    this.chatArea.querySelectorAll('.messages')[0].appendChild(messageDiv)
+    console.log(template)
+    template.querySelectorAll('.author')[0].textContent = message.username + ':'
+    template.querySelectorAll('.text')[0].textContent = message.data
+    const messagesDiv = this.shadowRoot.querySelector('.messages')
+    messagesDiv.appendChild(template)
+
+    // Scroll down to latest sent message
+    const divHeight = messagesDiv.scrollHeight
+    messagesDiv.scrollTop = divHeight
   }
 
   clearWelcomeArea () {
@@ -89,6 +90,17 @@ class Chat extends window.HTMLElement {
       }
       welcomeArea.parentNode.removeChild(welcomeArea)
     }
+  }
+
+  listenToEnterBtn () {
+    const textarea = this.shadowRoot.querySelector('textarea')
+    textarea.addEventListener('keypress', (e) => {
+      if (e.keyCode === 13) {
+        e.preventDefault()
+        this.sendMessage(e.target.value)
+        e.target.value = ''
+      }
+    })
   }
 }
 

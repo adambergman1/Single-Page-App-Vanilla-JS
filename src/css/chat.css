@@ -3,8 +3,30 @@
     margin: 0 auto;
     padding: 10px 0;
     width: 90%;
+    font-size: 1em;
+}
+
+.message .text {
+    background: #8ab4f8;
+    border-radius: 24px;
+    padding: 10px 12px;
+    display: inline-block;
+}
+
+.message .author {
+    font-size: 0.9em;
+    display: inline-block;
+}
+
+.messages {
+    overflow: scroll;
+    height: 350px;
 }
 
 textarea {
-    max-width: 90%;
+    min-height: 24px;
+    padding: 14px 20px;
+    width: calc(100% - 60px);
+    border-radius: 24px;
+    resize: none;
 }
