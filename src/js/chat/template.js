@@ -20,7 +20,13 @@ chatTemplate.innerHTML = /* html */ `
 
     <div class="messages">
         <template>
-            <div class="message">
+            <div class="my-message">
+                <p class="author"></p>
+                <p class="text"></p>
+                <p class="time"></p>
+            </div>
+
+            <div class="received-message">
                 <p class="author"></p>
                 <p class="text"></p>
                 <p class="time"></p>
@@ -29,7 +35,10 @@ chatTemplate.innerHTML = /* html */ `
         </div>
 
             <div class="send-msg">
-                <textarea class="message-area"></textarea>
+                <textarea class="message-area">
+                <pre>Test</pre>
+                <code>Test</code>
+                </textarea>
                 <!-- <input type="submit" value="Send" class="send-btn"> -->
             </div>
 `

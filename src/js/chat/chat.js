@@ -72,12 +72,20 @@ class Chat extends window.HTMLElement {
   }
 
   printMessage (message) {
-    const template = this.shadowRoot.querySelectorAll('template')[0]
+    let template = this.shadowRoot.querySelectorAll('template')[0]
       .content.firstElementChild.cloneNode(true)
 
-    console.log(template)
+    if (this.username.value === message.username) {
+      console.log('My message')
+    } else {
+      console.log('Not my message')
+      template = this.shadowRoot.querySelectorAll('template')[0]
+        .content.lastElementChild.cloneNode(true)
+    }
+
     template.querySelectorAll('.author')[0].textContent = message.username + ':'
     template.querySelectorAll('.text')[0].textContent = message.data
+
     const messagesDiv = this.shadowRoot.querySelector('.messages')
     messagesDiv.appendChild(template)
 

@@ -6,16 +6,27 @@
     font-size: 1em;
 }
 
-.message .text {
-    background: #8ab4f8;
+.my-message .text, .received-message .text {
     border-radius: 24px;
     padding: 10px 12px;
     display: inline-block;
 }
 
-.message .author {
+.my-message .author, .received-message .author {
     font-size: 0.9em;
     display: inline-block;
+}
+
+.my-message .text {
+    background: #8ab4f8;
+}
+
+.received-message .text {
+    background: #ddd;
+}
+
+.received-message {
+    text-align: right;
 }
 
 .messages {
@@ -29,4 +40,6 @@ textarea {
     width: calc(100% - 60px);
     border-radius: 24px;
     resize: none;
+    border: none;
+    box-shadow: 0 1px 5px 0 rgba(60,64,67,.15), 0 4px 4px 0 rgba(60,64,67,.10), 0 -0.1px 3px 0 rgba(60,64,67,.08);
 }
