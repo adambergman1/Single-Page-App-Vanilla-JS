@@ -13,7 +13,6 @@ class Chat extends window.HTMLElement {
 
   connectedCallback () {
     this.startChat()
-    this.emojis()
   }
 
   startChat () {
@@ -27,6 +26,7 @@ class Chat extends window.HTMLElement {
         this.connect()
         this.listenToEnterBtn()
       }
+      startChatBtn.removeEventListener('click', (e))
     })
   }
 
@@ -107,13 +107,19 @@ class Chat extends window.HTMLElement {
   }
 
   listenToEnterBtn () {
-    const textarea = this.shadowRoot.querySelector('textarea')
-    textarea.addEventListener('keypress', (e) => {
+    const messageBox = this.shadowRoot.querySelector('.message-area')
+    messageBox.focus()
+    messageBox.addEventListener('keypress', (e) => {
       if (e.keyCode === 13) {
         e.preventDefault()
-        this.sendMessage(e.target.value)
-        e.target.value = ''
+        this.sendMessage(messageBox.textContent)
+        messageBox.textContent = ''
       }
+    })
+
+    const writeCode = this.shadowRoot.querySelector('.write-code')
+    writeCode.addEventListener('click', (e) => {
+      messageBox.classList.toggle('code')
     })
   }
 }

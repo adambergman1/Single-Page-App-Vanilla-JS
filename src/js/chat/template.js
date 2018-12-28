@@ -35,9 +35,11 @@ chatTemplate.innerHTML = /* html */ `
         </div>
 
             <div class="send-msg">
-                <textarea class="message-area"></textarea>
-                <!-- <input type="submit" value="Send" class="send-btn"> -->
-            </div>
+            <div class="buttons">
+                    <a href="#" class="write-code"><img src="/image/code.svg"></a>
+                </div>
+                <div class="message-area" contenteditable="true"></div>
+             </div>
 `
 
 export {

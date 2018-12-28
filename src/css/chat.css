@@ -34,12 +34,46 @@
     height: 350px;
 }
 
-textarea {
-    min-height: 24px;
-    padding: 14px 20px;
-    width: calc(100% - 60px);
-    border-radius: 24px;
-    resize: none;
-    border: none;
+.send-msg {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
     box-shadow: 0 1px 5px 0 rgba(60,64,67,.15), 0 4px 4px 0 rgba(60,64,67,.10), 0 -0.1px 3px 0 rgba(60,64,67,.08);
+    border-radius: 24px;
 }
+
+.message-area {
+    padding: 14px 20px;
+    overflow-y: scroll;
+    max-height: 150px;
+    cursor: text;
+}
+
+.message-area:empty:before {
+    content: 'Enter your message here';
+    color:gray
+  }
+
+  .buttons {
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    padding: 2px 20px;
+    background: #eee;
+  }
+
+  .write-code img {
+      max-width: 18px;
+  }
+
+  .code {
+      background: #ddd;
+      font-family: Monospace;
+      margin: 10px 0;
+      border: 10px solid #fff;
+      border-radius: 24px;
+  }
+  
+.message-area.code:empty:before {
+    content: 'Enter your code here';
+    color:gray
+  }
