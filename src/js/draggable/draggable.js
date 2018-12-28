@@ -5,9 +5,9 @@ template.innerHTML = /* html */ `
   <div class="window-heading"></div>
 
     <div class="window-buttons">
-      <a href="#" class="close-btn"><img src="/image/close-normal.png" width="14"></a>  
+      <a href="#" class="close-btn"><img src="/image/error.svg" width="14"></a>  
 
-      <label for="maximize-btn"><img src="/image/max-normal.png" width="14"></label>
+      <label for="maximize-btn"><img src="/image/plus.svg" width="14"></label>
         <input type="checkbox" id="maximize-btn" class="maximize-btn hidden" role="button">
 
     </div>

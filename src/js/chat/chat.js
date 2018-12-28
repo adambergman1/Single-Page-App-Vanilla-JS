@@ -9,6 +9,7 @@ class Chat extends window.HTMLElement {
     this.chatArea = this.shadowRoot.querySelector('.chat')
     this.username = this.shadowRoot.querySelector('.welcome #username')
     this.channel = this.shadowRoot.querySelector('.welcome #channel')
+    this.currentTime = new Date().toLocaleString('sv-se')
   }
 
   connectedCallback () {
@@ -25,7 +26,6 @@ class Chat extends window.HTMLElement {
         this.chatArea.appendChild(chatTemplate.content.cloneNode(true))
         this.connect()
         this.listenToEnterBtn()
-        this.addLogOutOption()
       }
       startChatBtn.removeEventListener('click', (e))
     })
@@ -50,7 +50,7 @@ class Chat extends window.HTMLElement {
 
       this.socket.addEventListener('message', e => {
         const message = JSON.parse(e.data)
-        if (message.type === 'message') {
+        if (message.type === 'message' && message.username !== 'MyFancyUsername') {
           this.printMessage(message)
         }
       })
@@ -62,7 +62,7 @@ class Chat extends window.HTMLElement {
       type: 'message',
       data: text,
       username: this.username.value || 'Pro',
-      time: new Date().toLocaleString('sv-se'),
+      time: this.currentTime,
       channel: this.channel.value | '',
       key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
     }

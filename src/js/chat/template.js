@@ -21,15 +21,15 @@ chatTemplate.innerHTML = /* html */ `
     <div class="messages">
         <template>
             <div class="my-message">
+            <span class="time"></span> 
                 <p class="author"></p>
                 <p class="text"></p>
-                <span class="time"></span>
             </div>
 
             <div class="received-message">
+            <span class="time"></span>
                 <p class="author"></p>
                 <p class="text"></p>
-                <span class="time"></span>
             </div>
         </template>
         </div>
