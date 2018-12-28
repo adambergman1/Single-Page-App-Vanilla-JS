@@ -13,6 +13,7 @@ class Chat extends window.HTMLElement {
 
   connectedCallback () {
     this.startChat()
+    this.emojis()
   }
 
   startChat () {

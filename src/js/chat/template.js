@@ -35,10 +35,7 @@ chatTemplate.innerHTML = /* html */ `
         </div>
 
             <div class="send-msg">
-                <textarea class="message-area">
-                <pre>Test</pre>
-                <code>Test</code>
-                </textarea>
+                <textarea class="message-area"></textarea>
                 <!-- <input type="submit" value="Send" class="send-btn"> -->
             </div>
 `
