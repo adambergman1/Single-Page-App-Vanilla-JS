@@ -25,6 +25,7 @@ class Chat extends window.HTMLElement {
         this.chatArea.appendChild(chatTemplate.content.cloneNode(true))
         this.connect()
         this.listenToEnterBtn()
+        this.addLogOutOption()
       }
       startChatBtn.removeEventListener('click', (e))
     })
@@ -61,7 +62,7 @@ class Chat extends window.HTMLElement {
       type: 'message',
       data: text,
       username: this.username.value || 'Pro',
-      time: Date.now(),
+      time: new Date().toLocaleString('sv-se'),
       channel: this.channel.value | '',
       key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
     }
@@ -86,6 +87,7 @@ class Chat extends window.HTMLElement {
 
     template.querySelectorAll('.author')[0].textContent = message.username + ':'
     template.querySelectorAll('.text')[0].textContent = message.data
+    template.querySelectorAll('.time')[0].textContent = `Sent: ${message.time}`
 
     const messagesDiv = this.shadowRoot.querySelector('.messages')
     messagesDiv.appendChild(template)
@@ -119,7 +121,18 @@ class Chat extends window.HTMLElement {
 
     const writeCode = this.shadowRoot.querySelector('.write-code')
     writeCode.addEventListener('click', (e) => {
+      writeCode.classList.toggle('clicked')
       messageBox.classList.toggle('code')
+    })
+  }
+
+  addLogOutOption () {
+    const loggedInUser = this.shadowRoot.querySelector('.logged-in-user')
+    loggedInUser.textContent = this.username.value
+
+    const logOut = this.shadowRoot.querySelector('.log-out')
+    logOut.addEventListener('click', (e) => {
+      this.username.value = ''
     })
   }
 }

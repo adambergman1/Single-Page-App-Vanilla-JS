@@ -23,13 +23,13 @@ chatTemplate.innerHTML = /* html */ `
             <div class="my-message">
                 <p class="author"></p>
                 <p class="text"></p>
-                <p class="time"></p>
+                <span class="time"></span>
             </div>
 
             <div class="received-message">
                 <p class="author"></p>
                 <p class="text"></p>
-                <p class="time"></p>
+                <span class="time"></span>
             </div>
         </template>
         </div>
@@ -40,6 +40,10 @@ chatTemplate.innerHTML = /* html */ `
                 </div>
                 <div class="message-area" contenteditable="true"></div>
              </div>
+
+            <div class="user-info">
+            <p>Signed in as: <span class="logged-in-user"></span>. <a href="#" class="log-out">Log out?</a></p>
+            </div>
 `
 
 export {

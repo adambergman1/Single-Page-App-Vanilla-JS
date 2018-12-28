@@ -63,6 +63,7 @@
 
   .write-code img {
       max-width: 18px;
+      opacity: 0.5;
   }
 
   .code {
@@ -75,5 +76,24 @@
   
 .message-area.code:empty:before {
     content: 'Enter your code here';
-    color:gray
+  }
+
+  .clicked img {
+     opacity: 1;
+  }
+
+  .user-info p {
+      color: #666;
+      font-size: 0.8em;
+  }
+
+  .time {
+      visibility: hidden;
+      padding: 5px;
+      position: absolute;
+      font-size: 0.9em;
+  }
+
+  .messages :hover .time {
+      visibility: visible;
   }
