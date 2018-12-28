@@ -5,6 +5,7 @@ class Chat extends window.HTMLElement {
     super()
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.appendChild(welcomeTemplate.content.cloneNode(true))
+    this.socket = null
     this.chatArea = this.shadowRoot.querySelector('.chat')
     this.username = this.shadowRoot.querySelector('.welcome #username')
     this.channel = this.shadowRoot.querySelector('.welcome #channel')
@@ -29,20 +30,24 @@ class Chat extends window.HTMLElement {
   }
 
   connect () {
-    this.socket = new WebSocket('ws://vhost3.lnu.se:20080/socket/')
-
     return new Promise((resolve, reject) => {
       if (this.socket && this.socket.readyState === 1) {
         resolve(this.socket)
+        return
       }
 
-      this.socket.addEventListener('open', (e) => {
+      this.socket = new WebSocket('ws://vhost3.lnu.se:20080/socket/')
+
+      this.socket.addEventListener('open', e => {
         resolve(this.socket)
       })
 
-      this.socket.addEventListener('message', (e) => {
-        const message = JSON.parse(e.data)
+      this.socket.addEventListener('error', e => {
+        reject(new Error('could not connect to server'))
+      })
 
+      this.socket.addEventListener('message', e => {
+        const message = JSON.parse(e.data)
         if (message.type === 'message') {
           this.printMessage(message)
         }
