@@ -9,11 +9,11 @@ class Chat extends window.HTMLElement {
     this.chatArea = this.shadowRoot.querySelector('.chat')
     this.username = this.shadowRoot.querySelector('.welcome #username')
     this.channel = this.shadowRoot.querySelector('.welcome #channel')
-    this.currentTime = new Date().toLocaleString('sv-se')
   }
 
   connectedCallback () {
     this.startChat()
+    this.getUsername()
   }
 
   startChat () {
@@ -21,9 +21,9 @@ class Chat extends window.HTMLElement {
 
     startChatBtn.addEventListener('click', (e) => {
       if (this.username.value) {
-        console.log('Ready to chat!')
         this.clearWelcomeArea()
         this.chatArea.appendChild(chatTemplate.content.cloneNode(true))
+        this.setUsername()
         this.connect()
         this.listenToEnterBtn()
       }
@@ -62,14 +62,12 @@ class Chat extends window.HTMLElement {
       type: 'message',
       data: text,
       username: this.username.value || 'Pro',
-      time: this.currentTime,
       channel: this.channel.value | '',
       key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
     }
 
     this.connect().then(() => {
       this.socket.send(JSON.stringify(data))
-      console.log('Sending message', text)
     })
   }
 
@@ -77,17 +75,20 @@ class Chat extends window.HTMLElement {
     let template = this.shadowRoot.querySelectorAll('template')[0]
       .content.firstElementChild.cloneNode(true)
 
-    if (this.username.value === message.username) {
-      console.log('My message')
-    } else {
-      console.log('Not my message')
+    if (this.username.value !== message.username) {
+      // Not my message, target the last div
       template = this.shadowRoot.querySelectorAll('template')[0]
         .content.lastElementChild.cloneNode(true)
     }
 
     template.querySelectorAll('.author')[0].textContent = message.username + ':'
     template.querySelectorAll('.text')[0].textContent = message.data
-    template.querySelectorAll('.time')[0].textContent = `Sent: ${message.time}`
+    template.querySelectorAll('.time')[0].textContent = `Sent: ${new Date().toLocaleString('sv-se')}`
+
+    // Check if textarea is clicked, reveal timestamp in that case
+    template.querySelectorAll('.text')[0].addEventListener('click', (e) => {
+      template.querySelectorAll('.time')[0].classList.toggle('visible')
+    })
 
     const messagesDiv = this.shadowRoot.querySelector('.messages')
     messagesDiv.appendChild(template)
@@ -134,6 +135,18 @@ class Chat extends window.HTMLElement {
     logOut.addEventListener('click', (e) => {
       this.username.value = ''
     })
+  }
+
+  setUsername () {
+    if (this.username.value !== null) {
+      window.localStorage.setItem('username', JSON.stringify(this.username.value))
+    }
+  }
+
+  getUsername () {
+    if (window.localStorage.getItem('username') !== null) {
+      this.username.value = JSON.parse(window.localStorage.getItem('username'))
+    }
   }
 }
 

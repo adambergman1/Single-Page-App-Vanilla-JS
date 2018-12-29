@@ -115,12 +115,15 @@
   .time {
       visibility: hidden;
       padding: 5px;
-      font-size: 0.9em;
+      font-size: 0.75em;
       background: #333;
       color: #fff;
-      position: absolute;
   }
 
-  .my-message:hover .time, .received-message:hover .time {
+  /* .my-message:hover .time, .received-message:hover .time {
+      visibility: visible;
+  } */
+
+  .visible {
       visibility: visible;
   }
