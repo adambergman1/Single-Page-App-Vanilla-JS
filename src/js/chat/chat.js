@@ -127,16 +127,6 @@ class Chat extends window.HTMLElement {
     })
   }
 
-  addLogOutOption () {
-    const loggedInUser = this.shadowRoot.querySelector('.logged-in-user')
-    loggedInUser.textContent = this.username.value
-
-    const logOut = this.shadowRoot.querySelector('.log-out')
-    logOut.addEventListener('click', (e) => {
-      this.username.value = ''
-    })
-  }
-
   setUsername () {
     if (this.username.value !== null) {
       window.localStorage.setItem('username', JSON.stringify(this.username.value))

@@ -10,6 +10,7 @@ template.innerHTML = /* html */ `
       <label for="maximize-btn"><img src="/image/plus.svg" width="14"></label>
         <input type="checkbox" id="maximize-btn" class="maximize-btn hidden" role="button">
 
+
     </div>
 
   <slot class="main-area"></slot>

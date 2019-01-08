@@ -33,7 +33,9 @@ export class Desktop extends window.HTMLElement {
     this.Z_INDEX = 20
     this.arr = []
     this.openedWindows = this.shadowRoot.querySelector('.opened-windows')
+  }
 
+  connectedCallback () {
     this.startTripCalculator()
     this.startMemory()
     this.startChat()
@@ -48,24 +50,7 @@ export class Desktop extends window.HTMLElement {
       this.openedWindows.appendChild(tripTemplate)
       this.arr.push(tripTemplate)
       this.updateZIndex()
-
-      let win = tripTemplate.shadowRoot.querySelector('drag-able')
-        .shadowRoot.querySelector('.window')
-      let close = win.querySelector('.close-btn')
-
-      close.addEventListener('click', (e) => {
-        console.log('Closing:')
-        console.log(win)
-
-        console.log('Array before removal:')
-        console.log(this.arr)
-
-        this.arr.splice(parent, 1)
-        win.parentNode.removeChild(win)
-
-        console.log('Array after removal:')
-        console.log(this.arr)
-      })
+      this.closeWindow(e)
     })
   }
 
@@ -76,6 +61,7 @@ export class Desktop extends window.HTMLElement {
       this.openedWindows.appendChild(memoryTemplate)
       this.arr.push(memoryTemplate)
       this.updateZIndex()
+      this.closeWindow(e)
     })
   }
 
@@ -86,6 +72,7 @@ export class Desktop extends window.HTMLElement {
       this.openedWindows.appendChild(chatTemplate)
       this.arr.push(chatTemplate)
       this.updateZIndex()
+      this.closeWindow(e)
     })
   }
 
@@ -110,52 +97,24 @@ export class Desktop extends window.HTMLElement {
     }
   }
 
-  // closeWindow (e) {
-  // let target = this.arr.indexOf(e.target)
-  // console.log(target)
-  // let win = this.arr.shadowRoot.querySelector('drag-able').shadowRoot.querySelector('.window')
-  // let closeBtn = win.querySelector('.window-buttons .close-btn')
+  closeWindow (e) {
+    let win = this.arr.shadowRoot.querySelector('drag-able').shadowRoot.querySelector('.window')
+    let closeBtn = win.querySelector('.window-buttons .close-btn')
 
-  // closeBtn.addEventListener('click', (e) => {
-  //   e.preventDefault()
-  //   e.stopPropagation()
-  //   console.log('Closing:')
-  //   console.log(this.arr.indexOf(e.target))
+    closeBtn.addEventListener('click', (e) => {
+      console.log('Closing:')
+      console.log(win)
 
-  //   console.log('Array before removal:')
-  //   console.log(this.arr)
+      console.log('Array before removal:')
+      console.log(this.arr)
 
-  //   this.arr.splice(e.target, 1)
-  //   win.parentNode.removeChild(win)
+      win.parentNode.removeChild(win)
+      this.arr.pop()
 
-  //   console.log('Array after removal:')
-  //   console.log(this.arr)
-
-  //   closeBtn.removeEventListener('click', (e))
-  // })
-
-  // for (let i = 0; i < this.arr.length; i++) {
-  //   let win = this.arr[i].shadowRoot.querySelector('drag-able').shadowRoot.querySelector('.window')
-  //   let closeBtn = win.querySelector('.window-buttons .close-btn')
-
-  //   closeBtn.addEventListener('click', (e) => {
-  //     e.preventDefault()
-  //     console.log('Closing:')
-  //     console.log(this.arr[i])
-
-  //     console.log('Array before removal:')
-  //     console.log(this.arr)
-
-  //     this.arr.splice(i, 1)
-  //     win.parentNode.removeChild(win)
-
-  //     console.log('Array after removal:')
-  //     console.log(this.arr)
-
-  //     closeBtn.removeEventListener('click', (e))
-  //   })
-  // }
-  // }
+      console.log('Array after removal:')
+      console.log(this.arr)
+    })
+  }
 }
 
 window.customElements.define('personal-desktop', Desktop)
