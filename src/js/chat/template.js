@@ -3,6 +3,8 @@ welcomeTemplate.innerHTML = /* html */ `
 <link rel="stylesheet" href="/css/chat.css">
 <drag-able data-title="Chat">
 
+<img src="/image/chat.png" width="28" class="app-icon">
+
 <div class="chat" id="chat">
     <div class="welcome">
         <p>Choose username and channel</p>

@@ -98,21 +98,12 @@ export class Desktop extends window.HTMLElement {
   }
 
   closeWindow (e) {
-    let win = this.arr.shadowRoot.querySelector('drag-able').shadowRoot.querySelector('.window')
+    let win = this.arr[this.arr.length - 1].shadowRoot.querySelector('drag-able').shadowRoot.querySelector('.window')
     let closeBtn = win.querySelector('.window-buttons .close-btn')
 
     closeBtn.addEventListener('click', (e) => {
-      console.log('Closing:')
-      console.log(win)
-
-      console.log('Array before removal:')
-      console.log(this.arr)
-
       win.parentNode.removeChild(win)
       this.arr.pop()
-
-      console.log('Array after removal:')
-      console.log(this.arr)
     })
   }
 }
