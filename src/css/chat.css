@@ -130,6 +130,8 @@
 
   .app-icon {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 6px;
+    right: 10px;
+    width: 18px;
+    pointer-events: none;
 }

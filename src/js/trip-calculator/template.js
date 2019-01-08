@@ -3,6 +3,8 @@ tripTemplate.innerHTML = /* html */ `
 <link rel="stylesheet" href="/css/trip-calculator.css">
 <drag-able data-title="Reseräknaren">
 
+<img src="/image/trip-calculator.png" class="app-icon">
+
 <div class="trip-calculator" id="trip-calculator">
 
 <h1>Räkna ut vad resan kostar</h1>

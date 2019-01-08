@@ -46,3 +46,11 @@ input[type=number], select, textarea {
     padding: 10px 0;
     width: 90%;
 }
+
+.app-icon {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    width: 18px;
+    pointer-events: none;
+}

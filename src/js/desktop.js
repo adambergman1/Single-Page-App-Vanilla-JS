@@ -10,7 +10,7 @@ template.innerHTML = /* html */ `
         <div class="opened-windows"></div>
             <div class="dock">
                 <div class="trip">
-                    <a href="#" id="tripBtn"><img src="/image/performance.png"><p><span>Reseräknaren</span></p></a>
+                    <a href="#" id="tripBtn"><img src="/image/trip-calculator.png"><p><span>Reseräknaren</span></p></a>
                 </div>
 
                 <div class="memory">

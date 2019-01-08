@@ -2,6 +2,9 @@ const gameTemplate = document.createElement('template')
 gameTemplate.innerHTML = /* html */ `
 <drag-able data-title="Memory">
 <link rel="stylesheet" href="/css/memory.css">
+
+<img src="/image/memory.png" class="app-icon">
+
 <div class="memory" id="memory">
     <h1>Memory Game</h1>
 <div class="choose-layout">

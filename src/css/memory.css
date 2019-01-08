@@ -58,3 +58,11 @@ height: 30px;
     transition: 0.5s;
     background: #93bcff;
 }
+
+.app-icon {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    width: 18px;
+    pointer-events: none;
+}
