@@ -37,7 +37,6 @@ chatTemplate.innerHTML = /* html */ `
 
             <div class="send-msg">
             <div class="buttons">
-                    <a href="#" class="write-code"><img src="/image/code.svg"></a>
                 </div>
                 <div class="message-area" contenteditable="true"></div>
              </div>

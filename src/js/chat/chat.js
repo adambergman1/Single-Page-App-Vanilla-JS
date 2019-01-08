@@ -38,7 +38,7 @@ class Chat extends window.HTMLElement {
         return
       }
 
-      this.socket = new WebSocket('ws://vhost3.lnu.se:20080/socket/')
+      this.socket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/')
 
       this.socket.addEventListener('open', e => {
         resolve(this.socket)
@@ -46,12 +46,15 @@ class Chat extends window.HTMLElement {
 
       this.socket.addEventListener('error', e => {
         reject(new Error('could not connect to server'))
+        this.chatOffline()
       })
 
       this.socket.addEventListener('message', e => {
         const message = JSON.parse(e.data)
         if (message.type === 'message' && message.username !== 'MyFancyUsername') {
-          this.printMessage(message)
+          if (message.channel === this.channel.value) {
+            this.printMessage(message)
+          }
         }
       })
     })
@@ -62,7 +65,7 @@ class Chat extends window.HTMLElement {
       type: 'message',
       data: text,
       username: this.username.value || 'Pro',
-      channel: this.channel.value | '',
+      channel: this.channel.value || '',
       key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
     }
 
@@ -119,12 +122,6 @@ class Chat extends window.HTMLElement {
         messageBox.textContent = ''
       }
     })
-
-    const writeCode = this.shadowRoot.querySelector('.write-code')
-    writeCode.addEventListener('click', (e) => {
-      writeCode.classList.toggle('clicked')
-      messageBox.classList.toggle('code')
-    })
   }
 
   setUsername () {
@@ -137,6 +134,17 @@ class Chat extends window.HTMLElement {
     if (window.localStorage.getItem('username') !== null) {
       this.username.value = JSON.parse(window.localStorage.getItem('username'))
     }
+  }
+
+  chatOffline () {
+    const messageBox = this.shadowRoot.querySelector('.message-area')
+    messageBox.classList.toggle('offline')
+
+    const data = {
+      username: 'Server',
+      data: 'Could not connect. Please check your internet connection.'
+    }
+    this.printMessage(data)
   }
 }
 

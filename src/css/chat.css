@@ -135,3 +135,7 @@
     width: 18px;
     pointer-events: none;
 }
+
+.offline {
+    pointer-events: none;
+}
