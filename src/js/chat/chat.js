@@ -31,32 +31,24 @@ class Chat extends window.HTMLElement {
     })
   }
 
-  connect () {
-    return new Promise((resolve, reject) => {
-      if (this.socket && this.socket.readyState === 1) {
-        resolve(this.socket)
-        return
-      }
+  async connect () {
+    if (this.socket && this.socket.readyState === 1) {
+      return this.socket
+    }
 
-      this.socket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/')
+    this.socket = await new window.WebSocket('ws://vhost3.lnu.se:20080/socket/')
 
-      this.socket.addEventListener('open', e => {
-        resolve(this.socket)
-      })
+    this.socket.addEventListener('error', e => {
+      this.chatOffline()
+    })
 
-      this.socket.addEventListener('error', e => {
-        reject(new Error('could not connect to server'))
-        this.chatOffline()
-      })
-
-      this.socket.addEventListener('message', e => {
-        const message = JSON.parse(e.data)
-        if (message.type === 'message' && message.username !== 'MyFancyUsername') {
-          if (message.channel === this.channel.value) {
-            this.printMessage(message)
-          }
+    this.socket.addEventListener('message', e => {
+      const message = JSON.parse(e.data)
+      if (message.type === 'message' && message.username !== 'MyFancyUsername') {
+        if (message.channel === this.channel.value) {
+          this.printMessage(message)
         }
-      })
+      }
     })
   }
 

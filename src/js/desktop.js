@@ -101,14 +101,8 @@ export class Desktop extends window.HTMLElement {
     let closeBtn = win.querySelector('.window-buttons .close-btn')
 
     closeBtn.addEventListener('click', (e) => {
-      console.log('Array before removal:')
-      console.log(this.arr)
-
       win.parentNode.removeChild(win)
       this.arr.pop()
-
-      console.log('Array after removal:')
-      console.log(this.arr)
     })
   }
 }
