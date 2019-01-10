@@ -52,9 +52,12 @@ class Draggable extends window.HTMLElement {
           pos2 = pos4 - e.clientY
           pos3 = e.clientX
           pos4 = e.clientY
-          div.style.top = (div.offsetTop - pos2) + 'px'
-          div.style.left = (div.offsetLeft - pos1) + 'px'
-          div.classList.add('active')
+
+          if (pos4 > -5) {
+            div.style.top = (div.offsetTop - pos2) + 'px'
+            div.style.left = (div.offsetLeft - pos1) + 'px'
+            div.classList.add('active')
+          }
         }
       })
 
