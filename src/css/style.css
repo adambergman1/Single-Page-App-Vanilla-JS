@@ -34,6 +34,7 @@ html {
 
 .dock > div img {
     width: 60px;
+    transition: 0.3s;
 }
 
 .dock > div img:hover {
@@ -60,19 +61,19 @@ html {
         position:absolute;
         width:12px;
         height:12px;
-        left:50%;
+        left:48%;
         top:100%;
-        /* transform:translate(-50%,-50%) rotate(45deg); */
         transform: rotate(45deg);
          -webkit-transform: rotate(45deg);
         background-color:rgba(255, 255, 255, 0.9);
         z-index: -100;
+        margin-top: -6px;
 }
 
 .dock > div a p span {
     display: inline-block;
     padding: 5px 12px;
-    background: rgba(255, 255, 255, 0.9);
+    background: #fff;
     font-size: inherit;
     color: #000;
     border-radius: 3px;

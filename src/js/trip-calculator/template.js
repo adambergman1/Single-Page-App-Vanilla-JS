@@ -6,8 +6,8 @@ tripTemplate.innerHTML = /* html */ `
 <img src="/image/trip-calculator.png" class="app-icon">
 
 <div class="trip-calculator" id="trip-calculator">
-
-<h1>Räkna ut vad resan kostar</h1>
+    <div class="row">
+        <h1>Räkna ut vad resan kostar</h1>
 
 <form method="post" action="">
     <label for="miles">Antal mil</label>
@@ -35,7 +35,8 @@ tripTemplate.innerHTML = /* html */ `
     </form>
     <div class="travel-cost">
     </div>
-
+    
+    </div>
 </div>
 </drag-able>
 

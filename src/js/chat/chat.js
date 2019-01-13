@@ -47,12 +47,14 @@ class Chat extends window.HTMLElement {
       if (message.type === 'message' && message.username !== 'MyFancyUsername') {
         if (message.channel === this.channel.value) {
           this.printMessage(message)
+          const audio = new Audio('/music/new-message.mp3')
+          audio.play()
         }
       }
     })
   }
 
-  sendMessage (text) {
+  async sendMessage (text) {
     const data = {
       type: 'message',
       data: text,
@@ -61,9 +63,8 @@ class Chat extends window.HTMLElement {
       key: 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
     }
 
-    this.connect().then(() => {
-      this.socket.send(JSON.stringify(data))
-    })
+    const connection = await this.connect()
+    connection.send(JSON.stringify(data))
   }
 
   printMessage (message) {

@@ -41,9 +41,24 @@ input[type=number], select, textarea {
 }
 
 .trip-calculator {
+    height: 100%;
+    background: 
+    linear-gradient(
+      rgba(255, 255, 255, 0.5), 
+      rgba(255, 255, 255, 0.5)
+    ),
+    url('/image/kvall.jpg');
+    background-size: cover;
+}
+
+input::placeholder {
+    color: #333;
+}
+
+.row {
     max-width: 400px;
     margin: 0 auto;
-    padding: 10px 0;
+    padding: 30px 60px;
     width: 90%;
 }
 
@@ -53,4 +68,9 @@ input[type=number], select, textarea {
     right: 10px;
     width: 18px;
     pointer-events: none;
+}
+
+.travel-cost p {
+    font-weight: 600;
+    font-size: 1.25em;
 }

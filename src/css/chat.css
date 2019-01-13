@@ -9,6 +9,7 @@
 .welcome {
     margin: 0 auto;
     text-align: center;
+    min-height: 360px;
 }
 
 #username, #channel {
@@ -119,10 +120,6 @@
       background: #333;
       color: #fff;
   }
-
-  /* .my-message:hover .time, .received-message:hover .time {
-      visibility: visible;
-  } */
 
   .visible {
       visibility: visible;
