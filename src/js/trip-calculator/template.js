@@ -1,9 +1,9 @@
 const tripTemplate = document.createElement('template')
 tripTemplate.innerHTML = /* html */ `
-<link rel="stylesheet" href="/css/trip-calculator.css">
+<link rel="stylesheet" href="./css/trip-calculator.css">
 <drag-able data-title="Reseräknaren">
 
-<img src="/image/trip-calculator.png" class="app-icon">
+<img src="./image/trip-calculator.png" class="app-icon">
 
 <div class="trip-calculator" id="trip-calculator">
     <div class="row">

@@ -47,7 +47,7 @@ input[type=number], select, textarea {
       rgba(255, 255, 255, 0.5), 
       rgba(255, 255, 255, 0.5)
     ),
-    url('/image/kvall.jpg');
+    url('../image/kvall.jpg');
     background-size: cover;
 }
 
@@ -73,4 +73,8 @@ input::placeholder {
 .travel-cost p {
     font-weight: 600;
     font-size: 1.25em;
+}
+
+input::-webkit-inner-spin-button {
+    display: none;
 }

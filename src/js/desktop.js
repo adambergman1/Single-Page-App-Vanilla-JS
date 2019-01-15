@@ -5,20 +5,20 @@ import './chat/chat.js'
 
 const template = document.createElement('template')
 template.innerHTML = /* html */ `
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="./css/style.css">
 <div class="desktop">
         <div class="opened-windows"></div>
             <div class="dock">
                 <div class="trip">
-                    <a href="#" id="tripBtn"><img src="/image/trip-calculator.png"><p><span>Reseräknaren</span></p></a>
+                    <a href="#" id="tripBtn"><img src="./image/trip-calculator.png"><p><span>Reseräknaren</span></p></a>
                 </div>
 
                 <div class="memory">
-                    <a href="#" id="memoryBtn"><img src="/image/memory.png"><p><span>Memory</span></p></a>
+                    <a href="#" id="memoryBtn"><img src="./image/memory.png"><p><span>Memory</span></p></a>
                 </div>
 
                 <div class="chat">
-                <a href="#" id="chatBtn"><img src="/image/chat.png"><p><span>Chatt</span></p></a>
+                <a href="#" id="chatBtn"><img src="./image/chat.png"><p><span>Chatt</span></p></a>
                 </div>
             </div>
         </div>

@@ -1,9 +1,9 @@
 const gameTemplate = document.createElement('template')
 gameTemplate.innerHTML = /* html */ `
 <drag-able data-title="Memory">
-<link rel="stylesheet" href="/css/memory.css">
+<link rel="stylesheet" href="./css/memory.css">
 
-<img src="/image/memory.png" class="app-icon">
+<img src="./image/memory.png" class="app-icon">
 
 <div class="memory" id="memory">
     <h1>Memory Game</h1>
@@ -19,7 +19,7 @@ gameTemplate.innerHTML = /* html */ `
 </div>
 <template>
   <div class="memory-area">
-    <a href="#"><img src="image/memory/0.png" alt="A memory brick" class="memory-img" /></a>
+    <a href="#"><img src="./image/memory/0.png" alt="A memory brick" class="memory-img" /></a>
   </div>
 </template>
 </div>
@@ -29,7 +29,7 @@ gameTemplate.innerHTML = /* html */ `
 const wonTemplate = document.createElement('template')
 wonTemplate.innerHTML = /* html */ `
 <div class="you-won">
-<link rel="stylesheet" href="/css/memory.css">
+<link rel="stylesheet" href="./css/memory.css">
 
 </div>
 `

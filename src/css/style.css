@@ -9,7 +9,7 @@ html, body, div, span, iframe, p, img, figure, label, form, nav {
 html {
     height: 100%;
     width: 100%;
-    background-image: url('/image/bg.jpg'); 
+    background-image: url('../image/bg.jpg'); 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
