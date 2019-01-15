@@ -17,18 +17,30 @@ class Chat extends window.HTMLElement {
   }
 
   startChat () {
+    const rememberMe = this.shadowRoot.querySelector('input[id="remember-me"]')
     const startChatBtn = this.shadowRoot.querySelector('.welcome .start-chat')
 
-    startChatBtn.addEventListener('click', (e) => {
-      if (this.username.value) {
-        this.clearWelcomeArea()
-        this.chatArea.appendChild(chatTemplate.content.cloneNode(true))
-        this.setUsername()
-        this.connect()
-        this.listenToEnterBtn()
-      }
-      startChatBtn.removeEventListener('click', (e))
-    })
+    if (window.localStorage.hasOwnProperty('username')) {
+      this.getUsername()
+      this.enterChat()
+    } else {
+      startChatBtn.addEventListener('click', (e) => {
+        if (this.username.value && rememberMe.checked) {
+          this.setUsername()
+          this.enterChat()
+        } else if (this.username.value) {
+          this.enterChat()
+        }
+        startChatBtn.removeEventListener('click', (e))
+      })
+    }
+  }
+
+  enterChat () {
+    this.clearWelcomeArea()
+    this.chatArea.appendChild(chatTemplate.content.cloneNode(true))
+    this.connect()
+    this.listenToEnterBtn()
   }
 
   async connect () {

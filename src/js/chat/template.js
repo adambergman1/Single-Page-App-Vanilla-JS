@@ -10,6 +10,10 @@ welcomeTemplate.innerHTML = /* html */ `
         <p>Choose username and channel</p>
         <input type="text" placeholder="Username" maxlength="15" id="username">
         <input type="text" placeholder="Channel" maxlength="30" id="channel">
+
+        <label for="remember-me">Remember me</label>
+        <input type="checkbox" id="remember-me">
+        
         <a href="#" class="btn start-chat">Enter</a>
     </div>
 </div>
