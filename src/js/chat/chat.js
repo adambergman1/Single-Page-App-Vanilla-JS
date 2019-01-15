@@ -16,6 +16,11 @@ class Chat extends window.HTMLElement {
     this.getUsername()
   }
 
+  /**
+   * Initiates loading of the chat application
+   *
+   * @memberof Chat
+   */
   startChat () {
     const rememberMe = this.shadowRoot.querySelector('input[id="remember-me"]')
     const startChatBtn = this.shadowRoot.querySelector('.welcome .start-chat')
@@ -36,6 +41,11 @@ class Chat extends window.HTMLElement {
     }
   }
 
+  /**
+   * Connects to the chat channel
+   *
+   * @memberof Chat
+   */
   enterChat () {
     this.clearWelcomeArea()
     this.chatArea.appendChild(chatTemplate.content.cloneNode(true))
@@ -43,6 +53,12 @@ class Chat extends window.HTMLElement {
     this.listenToEnterBtn()
   }
 
+  /**
+   * Connects to the WebSocket, returns an error message if connection refused and prints all messages being sent to the socket
+   *
+   * @returns a connection
+   * @memberof Chat
+   */
   async connect () {
     if (this.socket && this.socket.readyState === 1) {
       return this.socket
@@ -66,6 +82,12 @@ class Chat extends window.HTMLElement {
     })
   }
 
+  /**
+   * Sends the submitted message to the socket
+   *
+   * @param {*} text
+   * @memberof Chat
+   */
   async sendMessage (text) {
     const data = {
       type: 'message',
@@ -79,6 +101,12 @@ class Chat extends window.HTMLElement {
     connection.send(JSON.stringify(data))
   }
 
+  /**
+   * Prints the messages that has been and received by the socket
+   *
+   * @param {*} message
+   * @memberof Chat
+   */
   printMessage (message) {
     let template = this.shadowRoot.querySelectorAll('template')[0]
       .content.firstElementChild.cloneNode(true)
@@ -106,6 +134,11 @@ class Chat extends window.HTMLElement {
     messagesDiv.scrollTop = divHeight
   }
 
+  /**
+   * Removes the div that asks user for username and channel
+   *
+   * @memberof Chat
+   */
   clearWelcomeArea () {
     const welcomeArea = this.shadowRoot.querySelector('.welcome')
 
@@ -117,6 +150,11 @@ class Chat extends window.HTMLElement {
     }
   }
 
+  /**
+   * Listens to any values submitted in the message box and sends them if  Enter button is pressed
+   *
+   * @memberof Chat
+   */
   listenToEnterBtn () {
     const messageBox = this.shadowRoot.querySelector('.message-area')
     messageBox.focus()
@@ -129,18 +167,33 @@ class Chat extends window.HTMLElement {
     })
   }
 
+  /**
+   * Saves the username submitted by user
+   *
+   * @memberof Chat
+   */
   setUsername () {
     if (this.username.value !== null) {
       window.localStorage.setItem('username', JSON.stringify(this.username.value))
     }
   }
 
+  /**
+   * Pre-defining the username if it has been entered before
+   *
+   * @memberof Chat
+   */
   getUsername () {
     if (window.localStorage.getItem('username') !== null) {
       this.username.value = JSON.parse(window.localStorage.getItem('username'))
     }
   }
 
+  /**
+   * Sends an offline message to the user that the chat couldnt connect
+   *
+   * @memberof Chat
+   */
   chatOffline () {
     const messageBox = this.shadowRoot.querySelector('.message-area')
     messageBox.classList.toggle('offline')

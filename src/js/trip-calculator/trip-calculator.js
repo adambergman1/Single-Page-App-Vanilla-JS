@@ -19,6 +19,11 @@ class TripCalculator extends window.HTMLElement {
     this.countInWear()
   }
 
+  /**
+   * Listens to values submitted by the user and then runs several functions to return a result value
+   *
+   * @memberof TripCalculator
+   */
   checkForValues () {
     this.submitBtn.addEventListener('click', (e) => {
       e.preventDefault()
@@ -37,6 +42,11 @@ class TripCalculator extends window.HTMLElement {
     })
   }
 
+  /**
+   * Calculates cost of the trip
+   *
+   * @memberof TripCalculator
+   */
   calculateCost () {
     let travelCost = this.shadowRoot.querySelector('.travel-cost')
     let p = document.createElement('p')
@@ -52,13 +62,22 @@ class TripCalculator extends window.HTMLElement {
     }
   }
 
+  /**
+   * Checks if there are any values entered with commas and changes it to dots
+   *
+   * @memberof TripCalculator
+   */
   changeCommasToDots () {
     let input = this.shadowRoot.querySelectorAll('form input[type="number"]')
     for (let i = 0; i < input.length; i++) {
       input[i].value = input[i].value.replace(',', '.')
     }
   }
-
+  /**
+ * Checks if the "count in wear" option is checked and changes the values of gas price and consumption level automatically to fixed values
+ *
+ * @memberof TripCalculator
+ */
   countInWear () {
     let countWear = this.shadowRoot.querySelector('form input[id="count-in-wear"]')
     countWear.addEventListener('change', (e) => {
@@ -77,6 +96,11 @@ class TripCalculator extends window.HTMLElement {
     })
   }
 
+  /**
+   * Saves the values consumption and gas price entered by user
+   *
+   * @memberof TripCalculator
+   */
   saveToLocalStorage () {
     let obj = {
       'consumption': this.consumption.value,
@@ -86,6 +110,11 @@ class TripCalculator extends window.HTMLElement {
     window.localStorage.setItem('data', JSON.stringify(obj))
   }
 
+  /**
+   * Fetches the saved values in localStorage and enters it in the input fields
+   *
+   * @memberof TripCalculator
+   */
   fetchLocalStorage () {
     let savedObj = JSON.parse(window.localStorage.getItem('data'))
 
@@ -93,6 +122,11 @@ class TripCalculator extends window.HTMLElement {
     this.consumption.value = savedObj.consumption
   }
 
+  /**
+   * Removes the div that tells the total trip cost if it has already been called once
+   *
+   * @memberof TripCalculator
+   */
   clearTravelCostArea () {
     let travelCostDiv = this.shadowRoot.querySelector('.travel-cost')
     if (travelCostDiv) {

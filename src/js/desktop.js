@@ -41,6 +41,11 @@ export class Desktop extends window.HTMLElement {
     this.checkForClickOnWindow()
   }
 
+  /**
+   * Listens to click on the Trip Calculator application and initiates it
+   *
+   * @memberof Desktop
+   */
   startTripCalculator () {
     const tripBtn = this.shadowRoot.querySelector('#tripBtn')
     tripBtn.addEventListener('click', e => {
@@ -53,6 +58,11 @@ export class Desktop extends window.HTMLElement {
     })
   }
 
+  /**
+   * Listens to click on the Memory application and initiates it
+   *
+   * @memberof Desktop
+   */
   startMemory () {
     const memoryBtn = this.shadowRoot.querySelector('#memoryBtn')
     memoryBtn.addEventListener('click', e => {
@@ -64,6 +74,11 @@ export class Desktop extends window.HTMLElement {
     })
   }
 
+  /**
+   * Listens to click on the Chat application and initiates it
+   *
+   * @memberof Desktop
+   */
   startChat () {
     const chatBtn = this.shadowRoot.querySelector('#chatBtn')
     chatBtn.addEventListener('click', e => {
@@ -75,6 +90,11 @@ export class Desktop extends window.HTMLElement {
     })
   }
 
+  /**
+   * Checks if an opened div is clicked on and brings it on top of all other divs
+   *
+   * @memberof Desktop
+   */
   checkForClickOnWindow () {
     this.openedWindows.addEventListener('mousedown', e => {
       let index = this.arr.indexOf(e.target)
@@ -85,17 +105,35 @@ export class Desktop extends window.HTMLElement {
     })
   }
 
+  /**
+   * Returns a long querySelector, the window that is being clicked on
+   *
+   * @param {*} dragable
+   * @returns window
+   * @memberof Desktop
+   */
   getWindow (dragable) {
     return dragable.shadowRoot.querySelector('drag-able')
       .shadowRoot.querySelector('.window')
   }
 
+  /**
+   * Increases z-index of a div
+   *
+   * @memberof Desktop
+   */
   updateZIndex () {
     for (let i = 0; i < this.arr.length; i++) {
       this.getWindow(this.arr[i]).style.zIndex = this.Z_INDEX + i
     }
   }
 
+  /**
+   * Removes the entire div
+   *
+   * @param {*} e
+   * @memberof Desktop
+   */
   closeWindow (e) {
     let win = this.arr[this.arr.length - 1].shadowRoot.querySelector('drag-able').shadowRoot.querySelector('.window')
     let closeBtn = win.querySelector('.window-buttons .close-btn')

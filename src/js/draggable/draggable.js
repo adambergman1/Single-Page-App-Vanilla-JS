@@ -25,6 +25,12 @@ class Draggable extends window.HTMLElement {
     this.draggableWindows()
   }
 
+  /**
+   * Moves a div when it is dragged
+   *
+   * @param {*} e
+   * @memberof Draggable
+   */
   draggableWindows (e) {
     let windows = this.shadowRoot.querySelectorAll('.window')
     let windowHeading = this.shadowRoot.querySelector('.window-heading')
@@ -39,12 +45,14 @@ class Draggable extends window.HTMLElement {
     for (let i = 0; i < windows.length; i++) {
       let div = windows[i]
 
+      // Defines the current position of the div when it is first clicked
       windowHeading.addEventListener('mousedown', (e) => {
         isMouseDown = true
         pos3 = e.clientX
         pos4 = e.clientY
       })
 
+      // Updates the position of the div when it is moved
       document.addEventListener('mousemove', (e) => {
         e.preventDefault()
         if (isMouseDown) {
@@ -53,6 +61,7 @@ class Draggable extends window.HTMLElement {
           pos3 = e.clientX
           pos4 = e.clientY
 
+          // Prevents the user from moving the div higher up than the browser window
           if (pos4 > -5) {
             div.style.top = (div.offsetTop - pos2) + 'px'
             div.style.left = (div.offsetLeft - pos1) + 'px'

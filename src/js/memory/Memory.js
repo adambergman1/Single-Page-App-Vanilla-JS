@@ -23,6 +23,11 @@ class MemoryGame extends window.HTMLElement {
     this.checkForLayoutChange()
   }
 
+  /**
+   * Changes the number of bricks based on user selection
+   *
+   * @memberof MemoryGame
+   */
   changeLayout () {
     let memoryOptions = this.shadowRoot.querySelector('.memory-options')
     let selected = memoryOptions.options[memoryOptions.selectedIndex].value
@@ -39,6 +44,11 @@ class MemoryGame extends window.HTMLElement {
     }
   }
 
+  /**
+   * Initiates a new game after user has changed the amount of bricks to play with
+   *
+   * @memberof MemoryGame
+   */
   checkForLayoutChange () {
     let btn = this.shadowRoot.querySelector('.start')
 
@@ -51,6 +61,11 @@ class MemoryGame extends window.HTMLElement {
     })
   }
 
+  /**
+   *  Generates the memory cards
+   *
+   * @memberof MemoryGame
+   */
   generateMemory () {
     let template = this.shadowRoot.querySelectorAll('.memory template')[0].content.firstElementChild
     let div = document.importNode(template, false)
@@ -74,6 +89,11 @@ class MemoryGame extends window.HTMLElement {
     this.memoryDiv.appendChild(div)
   }
 
+  /**
+   * Adds all the memory bricks to an array
+   *
+   * @memberof MemoryGame
+   */
   getPicturesInArray () {
     for (let i = 1; i <= (this.rows * this.cols) / 2; i++) {
       this.tiles.push(i)
@@ -88,6 +108,14 @@ class MemoryGame extends window.HTMLElement {
     }
   }
 
+  /**
+   * Displays the memory brick when clicked and defines when there is a pair
+   *
+   * @param {*} tile
+   * @param {*} index
+   * @param {*} img
+   * @memberof MemoryGame
+   */
   turnBrick (tile, index, img) {
     if (this.secondTurn) { return }
     img.src = 'image/memory/' + tile + '.png'
@@ -130,6 +158,11 @@ class MemoryGame extends window.HTMLElement {
     }
   }
 
+  /**
+   * Tells the user that they have completed the memory and on how many attempts
+   *
+   * @memberof MemoryGame
+   */
   win () {
     this.memoryDiv.appendChild(wonTemplate.content.cloneNode(true))
     let wonTemp = this.shadowRoot.querySelector('.you-won')
@@ -141,6 +174,11 @@ class MemoryGame extends window.HTMLElement {
     btn.textContent = 'Start a new game'
   }
 
+  /**
+   * Removes the memory game area and resets neccessary variables before a new game
+   *
+   * @memberof MemoryGame
+   */
   clearArea () {
     let memoryArea = this.shadowRoot.querySelector('.memory-area')
     let wonTemp = this.shadowRoot.querySelector('.you-won')
