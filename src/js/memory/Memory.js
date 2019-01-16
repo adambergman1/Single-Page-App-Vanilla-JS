@@ -135,7 +135,7 @@ class MemoryGame extends window.HTMLElement {
 
         if (this.pairs === (this.cols * this.rows) / 2) {
           this.win()
-          const audio = new Audio('./music/ta-da.mp3')
+          const audio = new window.Audio('./music/ta-da.mp3')
           audio.play()
         }
 

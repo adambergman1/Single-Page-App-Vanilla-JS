@@ -75,7 +75,7 @@ class Chat extends window.HTMLElement {
       if (message.type === 'message' && message.username !== 'MyFancyUsername') {
         if (message.channel === this.channel.value) {
           this.printMessage(message)
-          const audio = new Audio('./music/new-message.mp3')
+          const audio = new window.Audio('./music/new-message.mp3')
           audio.play()
         }
       }
